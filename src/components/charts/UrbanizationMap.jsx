@@ -14,6 +14,8 @@ const UrbanizationMap = ({ data }) => {
   const [selectedYear, setSelectedYear] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [tooltipContent, setTooltipContent] = useState('');
+  const [zoom, setZoom] = useState(1);
+  const [center, setCenter] = useState([0, 0]);
 
   const processedData = useMemo(() => processUrbanizationData(data), [data]);
   
@@ -64,6 +66,24 @@ const UrbanizationMap = ({ data }) => {
     setIsPlaying(false);
   };
 
+  const handleZoomIn = () => {
+    setZoom(prev => Math.min(prev * 1.5, 8));
+  };
+
+  const handleZoomOut = () => {
+    setZoom(prev => Math.max(prev / 1.5, 1));
+  };
+
+  const handleResetZoom = () => {
+    setZoom(1);
+    setCenter([0, 0]);
+  };
+
+  const handleMoveEnd = (position) => {
+    setCenter(position.coordinates);
+    setZoom(position.zoom);
+  };
+
   if (!selectedYear || processedData.years.length === 0) {
     return (
       <div className="map-loading">
@@ -96,7 +116,11 @@ const UrbanizationMap = ({ data }) => {
             height: 'auto'
           }}
         >
-          <ZoomableGroup>
+          <ZoomableGroup
+            zoom={zoom}
+            center={center}
+            onMoveEnd={handleMoveEnd}
+          >
             <Geographies geography={geoUrl}>
               {({ geographies }) => {
                 // One-time debug log of GeoJSON structure
@@ -219,6 +243,31 @@ const UrbanizationMap = ({ data }) => {
             {tooltipContent}
           </div>
         )}
+
+        {/* Zoom Controls */}
+        <div className="zoom-controls">
+          <button 
+            className="zoom-button"
+            onClick={handleZoomIn}
+            title="Zoom In"
+          >
+            +
+          </button>
+          <button 
+            className="zoom-button"
+            onClick={handleZoomOut}
+            title="Zoom Out"
+          >
+            −
+          </button>
+          <button 
+            className="zoom-button reset-button"
+            onClick={handleResetZoom}
+            title="Reset View"
+          >
+            ⟲
+          </button>
+        </div>
       </div>
 
       {/* Controls */}

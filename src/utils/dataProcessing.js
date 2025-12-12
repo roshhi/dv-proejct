@@ -731,3 +731,97 @@ export const processCountryProfilesData = (data) => {
   
   return profiles;
 };
+
+/**
+ * Process data for HCC Inequality Crisis Scatter
+ */
+export const processInequalityCrisisData = (data) => {
+  return data
+    .map(d => ({
+      x: parseFloat(d.Gini_Index),
+      y: parseFloat(d.Wealth_Top10_Share),
+      country: d.Country,
+      iso3: d.ISO3
+    }))
+    .filter(d => !isNaN(d.x) && !isNaN(d.y));
+};
+
+/**
+ * Process data for HCC Social Atomization Scatter
+ */
+export const processSocialAtomizationData = (data) => {
+  return data
+    .map(d => ({
+      x: parseFloat(d.One_Person_HH_Perc),
+      y: parseFloat(d.GDP_Per_Capita),
+      country: d.Country,
+      iso3: d.ISO3
+    }))
+    .filter(d => !isNaN(d.x) && !isNaN(d.y));
+};
+
+/**
+ * Process data for HCC Debt Trap Scatter
+ */
+export const processDebtTrapData = (data) => {
+  return data
+    .map(d => ({
+      x: parseFloat(d.Household_Debt_to_Income),
+      y: parseFloat(d.GDP_Per_Capita),
+      country: d.Country,
+      iso3: d.ISO3
+    }))
+    .filter(d => !isNaN(d.x) && !isNaN(d.y));
+};
+
+/**
+ * Process data for Ideal Comparative Analysis
+ */
+export const processIdealComparativeData = (data) => {
+  // Get all available comparison metrics (all columns except Group and ISO3)
+  if (data.length === 0) return { metrics: [], chartData: {} };
+  
+  const allColumns = Object.keys(data[0]);
+  const metrics = allColumns.filter(col => col !== 'Group' && col !== 'ISO3');
+  
+  // Create chart data for each metric
+  const chartData = {};
+  
+  metrics.forEach(metric => {
+    chartData[metric] = data
+      .map(d => ({
+        country: d.Group, // Use Group column instead of Country
+        value: parseFloat(d[metric])
+      }))
+      .filter(d => !isNaN(d.value))
+      .sort((a, b) => b.value - a.value); // Sort descending
+  });
+  
+  return { metrics, chartData };
+};
+
+/**
+ * Process data for Wellbeing Best Predictors
+ */
+export const processBestPredictorsData = (data) => {
+  return data
+    .map(d => ({
+      feature: d.Indicator,
+      coefficient: parseFloat(d.Correlation)
+    }))
+    .filter(d => !isNaN(d.coefficient))
+    .sort((a, b) => b.coefficient - a.coefficient);
+};
+
+/**
+ * Process data for Wellbeing Worst Predictors
+ */
+export const processWorstPredictorsData = (data) => {
+  return data
+    .map(d => ({
+      feature: d.Indicator,
+      coefficient: parseFloat(d.Correlation)
+    }))
+    .filter(d => !isNaN(d.coefficient))
+    .sort((a, b) => a.coefficient - b.coefficient); // Sort ascending (most negative first)
+};

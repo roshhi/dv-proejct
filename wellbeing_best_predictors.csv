@@ -1,0 +1,12 @@
+Indicator,Correlation,P_Value,Countries,Abs_Correlation,Direction
+Child_Poverty_Rate,0.5348968105065667,0.00037665633991814236,40,0.5348968105065667,Positive (↑ indicator = ↑ well-being)
+GDP_Per_Capita,0.5170832151360293,1.8582983832815947e-12,162,0.5170832151360293,Positive (↑ indicator = ↑ well-being)
+Edu_Pub_Exp_GDP,0.33266706887365183,2.5475851935315727e-07,229,0.33266706887365183,Positive (↑ indicator = ↑ well-being)
+Family_Trust_Raw,0.30357142857142855,0.27135583600386853,15,0.30357142857142855,Positive (↑ indicator = ↑ well-being)
+Corruption_Control,0.22793763868566605,0.0011697343245548324,200,0.22793763868566605,Positive (↑ indicator = ↑ well-being)
+Wealth_Top10_Share,0.11780749218066733,0.09251150419597617,205,0.11780749218066733,Positive (↑ indicator = ↑ well-being)
+Gini_Index,0.09367341252453491,0.3349068891468353,108,0.09367341252453491,Positive (↑ indicator = ↑ well-being)
+House_Price_to_Income,0.07654784240150095,0.6387343360645062,40,0.07654784240150095,Positive (↑ indicator = ↑ well-being)
+Hospital_Beds_Per_1000,0.06530837200464269,0.42718501478307724,150,0.06530837200464269,Positive (↑ indicator = ↑ well-being)
+One_Person_HH_Perc,0.005470964037279816,0.9398074364857294,193,0.005470964037279816,Positive (↑ indicator = ↑ well-being)
+Family_Importance_Raw,0.000331743727970143,0.9973201746333098,105,0.000331743727970143,Positive (↑ indicator = ↑ well-being)

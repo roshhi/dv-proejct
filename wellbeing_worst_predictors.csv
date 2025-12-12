@@ -1,0 +1,9 @@
+Indicator,Correlation,P_Value,Countries,Abs_Correlation,Direction
+Suicide_Rate,-0.8123659951458952,1.9901951833877695e-20,82,0.8123659951458952,Negative (↑ indicator = ↓ well-being)
+Household_Debt_to_Income,-0.5495652173913043,0.005406579828666856,24,0.5495652173913043,Negative (↑ indicator = ↓ well-being)
+Infant_Mortality_Rate,-0.42894749654525444,2.98145973169442e-12,242,0.42894749654525444,Negative (↑ indicator = ↓ well-being)
+Poverty_Rate,-0.39400469872592364,7.117871569341035e-06,122,0.39400469872592364,Negative (↑ indicator = ↓ well-being)
+Health_OOP_Perc,-0.3358283858722421,9.761876947037876e-08,240,0.3358283858722421,Negative (↑ indicator = ↓ well-being)
+Homicide_Rate,-0.22553044678281872,0.004919119730760772,154,0.22553044678281872,Negative (↑ indicator = ↓ well-being)
+Avg_HH_Size,-0.09481165415043222,0.1980094580132386,186,0.09481165415043222,Negative (↑ indicator = ↓ well-being)
+Unemployment_Rate,-0.01586090035079116,0.8101005890832228,232,0.01586090035079116,Negative (↑ indicator = ↓ well-being)

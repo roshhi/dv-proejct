@@ -46,6 +46,12 @@ function App() {
   const [fertilityTrendsData, setFertilityTrendsData] = useState([]);
   const [indicatorDistData, setIndicatorDistData] = useState([]);
   const [countryProfilesData, setCountryProfilesData] = useState([]);
+  const [inequalityCrisisData, setInequalityCrisisData] = useState([]);
+  const [socialAtomizationData, setSocialAtomizationData] = useState([]);
+  const [debtTrapData, setDebtTrapData] = useState([]);
+  const [idealComparativeData, setIdealComparativeData] = useState([]);
+  const [wellbeingBestData, setWellbeingBestData] = useState([]);
+  const [wellbeingWorstData, setWellbeingWorstData] = useState([]);
   const [countryMapping, setCountryMapping] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -160,6 +166,42 @@ function App() {
         const profilesText = await profilesResponse.text();
         const parsedProfiles = Papa.parse(profilesText, { header: true }).data;
         setCountryProfilesData(parsedProfiles);
+
+        // Load HCC Inequality Crisis Data
+        const ineqCrisisResponse = await fetch('/hcc_inequality_crisis.csv');
+        const ineqCrisisText = await ineqCrisisResponse.text();
+        const parsedIneqCrisis = Papa.parse(ineqCrisisText, { header: true }).data;
+        setInequalityCrisisData(parsedIneqCrisis);
+
+        // Load HCC Social Atomization Data
+        const socialAtomResponse = await fetch('/hcc_social_atomizationx.csv');
+        const socialAtomText = await socialAtomResponse.text();
+        const parsedSocialAtom = Papa.parse(socialAtomText, { header: true }).data;
+        setSocialAtomizationData(parsedSocialAtom);
+
+        // Load HCC Debt Trap Data
+        const debtTrapResponse = await fetch('/hcc_debt_trap.csv');
+        const debtTrapText = await debtTrapResponse.text();
+        const parsedDebtTrap = Papa.parse(debtTrapText, { header: true }).data;
+        setDebtTrapData(parsedDebtTrap);
+
+        // Load Ideal Comparative Analysis Data
+        const idealCompResponse = await fetch('/ideal_comparative_analysis.csv');
+        const idealCompText = await idealCompResponse.text();
+        const parsedIdealComp = Papa.parse(idealCompText, { header: true }).data;
+        setIdealComparativeData(parsedIdealComp);
+
+        // Load Wellbeing Best Predictors Data
+        const wellbeingBestResponse = await fetch('/wellbeing_best_predictors.csv');
+        const wellbeingBestText = await wellbeingBestResponse.text();
+        const parsedWellbeingBest = Papa.parse(wellbeingBestText, { header: true }).data;
+        setWellbeingBestData(parsedWellbeingBest);
+
+        // Load Wellbeing Worst Predictors Data
+        const wellbeingWorstResponse = await fetch('/wellbeing_worst_predictors.csv');
+        const wellbeingWorstText = await wellbeingWorstResponse.text();
+        const parsedWellbeingWorst = Papa.parse(wellbeingWorstText, { header: true }).data;
+        setWellbeingWorstData(parsedWellbeingWorst);
         
         setLoading(false);
       } catch (error) {
@@ -326,6 +368,54 @@ function App() {
         chartType="countryProfiles"
         data={countryProfilesData}
         index={17}
+      />
+
+      <VisualizationSection
+        title="Inequality Crisis: Wealth Concentration"
+        description="Explore the relationship between income inequality (Gini Index) and wealth concentration in the top 10%. This visualization reveals how unequal societies tend to concentrate wealth at the very top, creating economic divides."
+        chartType="inequalityCrisis"
+        data={inequalityCrisisData}
+        index={18}
+      />
+
+      <VisualizationSection
+        title="Social Atomization: Household Structure vs GDP"
+        description="Examine how the rise of single-person households correlates with economic development. This chart captures the fragmentation of traditional family structures in wealthier, more developed societies."
+        chartType="socialAtomization"
+        data={socialAtomizationData}
+        index={19}
+      />
+
+      <VisualizationSection
+        title="Debt Trap: Household Debt vs Economic Output"
+        description="Visualize the burden of household debt relative to GDP per capita. High debt levels can trap households in economic precarity, limiting their ability to invest in the future and contributing to broader societal strain."
+        chartType="debtTrap"
+        data={debtTrapData}
+        index={20}
+      />
+
+      <VisualizationSection
+        title="Ideal Comparative Analysis"
+        description="Explore and compare countries across multiple development and social metrics. Use the dropdown menu to switch between different indicators and see how nations rank against each other in various dimensions of progress."
+        chartType="idealComparative"
+        data={idealComparativeData}
+        index={21}
+      />
+
+      <VisualizationSection
+        title="Positive Drivers of Wellbeing"
+        description="Discover the factors that most strongly correlate with higher wellbeing scores. These horizontal bars reveal which social, economic, and environmental indicators have the greatest positive impact on human flourishing."
+        chartType="wellbeingBestPredictors"
+        data={wellbeingBestData}
+        index={22}
+      />
+
+      <VisualizationSection
+        title="Negative Drivers of Wellbeing"
+        description="Identify the factors that correlate most strongly with lower wellbeing. Understanding these detractors—from inequality to social isolation—helps us recognize the pressures that diminish quality of life across societies."
+        chartType="wellbeingWorstPredictors"
+        data={wellbeingWorstData}
+        index={23}
       />
     </div>
   );
