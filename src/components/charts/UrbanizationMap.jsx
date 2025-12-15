@@ -21,10 +21,10 @@ const UrbanizationMap = ({ data }) => {
 
   const processedData = useMemo(() => processUrbanizationData(data), [data]);
   
-  // Initialize selected year to the latest year
+  // Initialize selected year to the first year
   useEffect(() => {
     if (processedData.years.length > 0 && !selectedYear) {
-      setSelectedYear(processedData.years[processedData.years.length - 1]);
+      setSelectedYear(processedData.years[0]);
     }
   }, [processedData.years, selectedYear]);
 
@@ -38,7 +38,8 @@ const UrbanizationMap = ({ data }) => {
         if (currentIndex >= processedData.years.length - 1) {
           setIsPlaying(false);
           setHasFinished(true);
-          return prevYear;
+          // Reset to first year when animation completes
+          return processedData.years[0];
         }
         setHasFinished(false);
         return processedData.years[currentIndex + 1];
@@ -295,17 +296,6 @@ const UrbanizationMap = ({ data }) => {
           >
             {isPlaying ? '⏸' : '▶'}
           </button>
-          
-          {hasFinished && (
-            <button 
-              className="play-button replay-button"
-              onClick={handleReplay}
-              title="Replay from start"
-              style={{ marginLeft: '8px' }}
-            >
-              ⟲
-            </button>
-          )}
           
           <div className="year-slider">
             <input
