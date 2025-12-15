@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend
 } from 'chart.js';
+import annotationPlugin from 'chartjs-plugin-annotation';
 import { processPCAData } from '../../utils/dataProcessing';
 
 ChartJS.register(
@@ -17,7 +18,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  annotationPlugin
 );
 
 const PCAClassificationChart = ({ data, countryMapping }) => {
@@ -102,6 +104,26 @@ const PCAClassificationChart = ({ data, countryMapping }) => {
           label: (context) => {
             const point = context.raw;
             return `${point.countryName}: (${point.x.toFixed(2)}, ${point.y.toFixed(2)})`;
+          }
+        }
+      },
+      annotation: {
+        annotations: {
+          verticalLine70: {
+            type: 'line',
+            xMin: 0.7,
+            xMax: 0.7,
+            borderColor: '#94a3b8',
+            borderWidth: 2,
+            borderDash: [6, 4]
+          },
+          horizontalLine70: {
+            type: 'line',
+            yMin: 0.7,
+            yMax: 0.7,
+            borderColor: '#94a3b8',
+            borderWidth: 2,
+            borderDash: [6, 4]
           }
         }
       }
